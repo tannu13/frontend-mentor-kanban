@@ -1,10 +1,13 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useState } from "react";
 import Button from "~/components/Button";
+import TextField from "~/components/TextField";
 import { api } from "~/utils/api";
 
 export default function Home() {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
+  const [fieldValue, setFieldValue] = useState("");
 
   return (
     <>
@@ -21,6 +24,18 @@ export default function Home() {
           <Button variant="secondary" size="large">
             Button Primary (L)
           </Button>
+          <div className="w-[300px]">
+            <TextField
+              id="id"
+              label="Text Field (Idle)"
+              value={fieldValue}
+              onChange={(v) => {
+                setFieldValue(v.target.value);
+              }}
+              placeholder="Enter task name"
+              errorMessage="Can't be empty"
+            />
+          </div>
           <p className="text-2xl">
             {hello.data ? hello.data.greeting : "Loading tRPC query..."}
           </p>
