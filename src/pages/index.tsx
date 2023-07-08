@@ -2,12 +2,14 @@ import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
 import Button from "~/components/Button";
+import Checkbox from "~/components/Checkbox";
 import TextField from "~/components/TextField";
 import { api } from "~/utils/api";
 
 export default function Home() {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
   const [fieldValue, setFieldValue] = useState("");
+  const [checked, setChecked] = useState(false);
 
   return (
     <>
@@ -34,6 +36,16 @@ export default function Home() {
               }}
               placeholder="Enter task name"
               errorMessage="Can't be empty"
+            />
+          </div>
+          <div className="w-[300px]">
+            <Checkbox
+              id="id-chk"
+              label="Text Field (Idle)"
+              checked={checked}
+              onChange={(v) => {
+                setChecked(v.target.checked);
+              }}
             />
           </div>
           <p className="text-2xl">
