@@ -1,15 +1,18 @@
 import Head from "next/head";
-import Link from "next/link";
 import { useState } from "react";
 import Button from "~/components/Button";
 import Checkbox from "~/components/Checkbox";
+import Dropdown, { TDropdownValue } from "~/components/Dropdown";
 import TextField from "~/components/TextField";
 import { api } from "~/utils/api";
+
+const statuses = [{ name: "To do" }, { name: "Doing" }, { name: "Done" }];
 
 export default function Home() {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
   const [fieldValue, setFieldValue] = useState("");
   const [checked, setChecked] = useState(false);
+  const [dropdownValue, setDropdownValue] = useState<TDropdownValue>();
 
   return (
     <>
@@ -46,6 +49,19 @@ export default function Home() {
               onChange={(v) => {
                 setChecked(v.target.checked);
               }}
+            />
+          </div>
+          <div className="w-[300px]">
+            <Dropdown
+              id="id_dd"
+              name="id_dd"
+              label="Dropdown (Idle)"
+              value={dropdownValue}
+              items={statuses}
+              onChange={(v) => {
+                setDropdownValue(v);
+              }}
+              placeholder="Enter task name"
             />
           </div>
           <p className="text-2xl">
