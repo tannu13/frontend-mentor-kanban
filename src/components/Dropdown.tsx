@@ -7,7 +7,7 @@ type Props = {
   id: string;
   name: string;
   label?: string;
-  value: TDropdownValue;
+  value?: TDropdownValue;
   items: TDropdownValue[];
   onChange: (value: TDropdownValue) => void;
   placeholder?: string;
